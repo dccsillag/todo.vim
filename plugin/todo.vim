@@ -32,30 +32,32 @@ endfunction
 
 function g:TodoCycleStatus()
     let l:colno = col(".")
+    normal! 0
     if match(getline('.'), '^\s*- .\+') >= 0
-        let l:i = match(getline('.'), '- .\+')
-        execute "normal! " .. l:i .. "|r*"
+        normal! f-
+        normal! r*
     elseif match(getline('.'), '^\s*\* .\+') >= 0
-        let l:i = match(getline('.'), '\* .\+')
-        execute "normal! " .. l:i .. "|r+"
+        normal! f*
+        normal! r+
     elseif match(getline('.'), '^\s*+ .\+') >= 0
-        let l:i = match(getline('.'), '+ .\+')
-        execute "normal! " .. l:i .. "|r-"
+        normal! f+
+        normal! r-
     endif
     execute "normal! " .. l:colno .. "|"
 endfunction
 
 function g:TodoReverseCycleStatus()
     let l:colno = col(".")
+    normal! 0
     if match(getline('.'), '^\s*- .\+') >= 0
-        let l:i = match(getline('.'), '- .\+')
-        execute "normal! " .. l:i .. "|r+"
+        normal! f-
+        normal! r+
     elseif match(getline('.'), '^\s*+ .\+') >= 0
-        let l:i = match(getline('.'), '+ .\+')
-        execute "normal! " .. l:i .. "|r*"
+        normal! f+
+        normal! r*
     elseif match(getline('.'), '^\s*\* .\+') >= 0
-        let l:i = match(getline('.'), '\* .\+')
-        execute "normal! " .. l:i .. "|r-"
+        normal! f*
+        normal! r-
     endif
     execute "normal! " .. l:colno .. "|"
 endfunction
