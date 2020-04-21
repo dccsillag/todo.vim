@@ -5,6 +5,8 @@ function s:SetupTodo()
     nnoremap <buffer><silent> o :call g:TodoNewLineBelow()<CR>
     nnoremap <buffer><silent> O :call g:TodoNewLineAbove()<CR>
     inoremap <buffer><silent> <CR> <ESC>:call g:TodoNewLineBelow()<CR>
+    inoremap <buffer><silent> <Tab> <C-O>:call g:TodoShiftRight()<CR>
+    inoremap <buffer><silent> <S-Tab> <C-O>:call g:TodoShiftLeft()<CR>
     nnoremap <buffer><silent> <Space> :call g:TodoCycleStatus()<CR>
     " Note: the following mapping will not work in a terminal (only in GVim)
     nnoremap <buffer><silent> <S-Space> :call g:TodoReverseCycleStatus()<CR>
@@ -28,6 +30,20 @@ function g:TodoNewLineAbove()
         execute "normal! O"
         startinsert!
     endif
+endfunction
+
+function g:TodoShiftRight()
+    let l:line = line(".")
+    let l:colno = col(".")
+    normal! >>
+    call cursor(l:line, l:colno + &sw)
+endfunction
+
+function g:TodoShiftLeft()
+    let l:line = line(".")
+    let l:colno = col(".")
+    normal! <<
+    call cursor(l:line, max([l:colno - &sw, 1]))
 endfunction
 
 function g:TodoCycleStatus()
