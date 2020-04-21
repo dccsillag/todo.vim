@@ -1,5 +1,6 @@
 function s:SetupTodo()
     setlocal foldmethod=syntax
+    setlocal conceallevel=2
 
     nnoremap <buffer><silent> o :call g:TodoNewLineBelow()<CR>
     nnoremap <buffer><silent> O :call g:TodoNewLineAbove()<CR>

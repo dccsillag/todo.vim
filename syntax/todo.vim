@@ -9,35 +9,44 @@ set cpo&vim
 
 " ------------------------------------------------------------------------------
 
+" Matches some markup (bold/italic/underline)
+syntax region markupItalic    matchgroup=Conceal start="\*"   skip="\\\*" end="\*"   concealends
+syntax region markupBold      matchgroup=Conceal start="\*\*" skip="\\\*" end="\*\*" concealends
+syntax region markupItalic    matchgroup=Conceal start="_"    skip="\\_"  end="_"    concealends
+syntax region markupUnderline matchgroup=Conceal start="__"   skip="\\__" end="__"   concealends
+
 " Matches todo/wip/done entries:
-syn match EntryTODO /^\s*- .\+/
-syn match EntryWIP /^\s*\* .\+/
-syn match EntryDone /^\s*+ .\+/
+syntax match EntryTODO /^\s*- .\+/
+syntax match EntryWIP /^\s*\* .\+/
+syntax match EntryDone /^\s*+ .\+/
 
 " Matches the whole entries, for various multiples of `shiftwidth`, for proper
 " folding:
-for level in [0, 1, 2, 3, 4]
+for level in range(0, 8)
     let indent = &sw * level
     if level == 0
-        execute "syn match toFold /^[-+\\*] .\\+\\n\\([^-+\\*].*\\n\\| \+.*\\n\\|\\n\\)\\+/ transparent fold"
+        execute "syntax match toFold /^[-+\\*] .\\+\\n\\([^-+\\*].*\\n\\| \+.*\\n\\|\\n\\)\\+/ transparent fold"
     else
-        execute "syn match toFold /^ \\{" .. indent .. "}[-+\\*] .\\+\\n\\( \\{" .. indent .. "}[^-+\\*].*\\n\\| \\{," .. (indent-1) .. "}[^ ].*\\n\\| \\{" .. (indent+1) .. ",}[^ ].*\\n\\|\\n\\)\\+/ transparent fold"
+        execute "syntax match toFold /^ \\{" .. indent .. "}[-+\\*] .\\+\\n\\( \\{" .. indent .. "}[^-+\\*].*\\n\\| \\{," .. (indent-1) .. "}[^ ].*\\n\\| \\{" .. (indent+1) .. ",}[^ ].*\\n\\|\\n\\)\\+/ transparent fold"
     endif
 endfor
-syn sync fromstart
+syntax sync fromstart
 
 " Matches titles
-syn match Title /.\+\n===\+\n/
-syn match Title /.\+\n---\+\n/
+syntax match Title /.\+\n===\+\n/
+syntax match Title /.\+\n---\+\n/
 
 " Matches properties
-syn match Special /[a-z-]:\s\+.\+\n/
+syntax match Special /[a-z-]:\s\+.\+\n/
 
 " ------------------------------------------------------------------------------
 
-hi link EntryTODO Keyword
-hi link EntryWIP  Identifier
-hi link EntryDone Comment
+highlight link EntryTODO Keyword
+highlight link EntryWIP  Identifier
+highlight link EntryDone Comment
+highlight markupBold ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold
+highlight markupItalic ctermfg=NONE ctermbg=NONE cterm=italic guifg=NONE guibg=NONE gui=italic
+highlight markupUnderline ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline
 
 " ------------------------------------------------------------------------------
 
@@ -45,5 +54,3 @@ let b:current_syntax = "todo"
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
-
-" vim: tw=80 cc=+1
