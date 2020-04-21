@@ -27,7 +27,7 @@ for level in range(0, 8)
     if level == 0
         execute "syntax match toFold /^[-+\\*] .\\+\\n\\([^-+\\*].*\\n\\| \+.*\\n\\|\\n\\)\\+/ transparent fold"
     else
-        execute "syntax match toFold /^ \\{" .. indent .. "}[-+\\*] .\\+\\n\\( \\{" .. indent .. "}[^-+\\*].*\\n\\| \\{," .. (indent-1) .. "}[^ ].*\\n\\| \\{" .. (indent+1) .. ",}[^ ].*\\n\\|\\n\\)\\+/ transparent fold"
+        execute "syntax match toFold /^ \\{" .. indent .. "}[-+\\*] .\\+\\n\\( \\{" .. indent .. "}[^-+\\*].*\\n\\| \\{" .. (indent+1) .. ",}[^ ].*\\n\\|\\n\\)\\+/ transparent fold"
     endif
 endfor
 syntax sync fromstart
