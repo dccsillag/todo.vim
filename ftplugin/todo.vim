@@ -1,17 +1,3 @@
-function s:SetupTodo()
-    setlocal foldmethod=syntax
-    setlocal conceallevel=2
-
-    nnoremap <buffer><silent> o :call g:TodoNewLineBelow()<CR>
-    nnoremap <buffer><silent> O :call g:TodoNewLineAbove()<CR>
-    inoremap <buffer><silent> <CR> <ESC>:call g:TodoNewLineBelow()<CR>
-    inoremap <buffer><silent> <Tab> <C-O>:call g:TodoShiftRight()<CR>
-    inoremap <buffer><silent> <S-Tab> <C-O>:call g:TodoShiftLeft()<CR>
-    nnoremap <buffer><silent> <Space> :call g:TodoCycleStatus()<CR>
-    " Note: the following mapping will not work in a terminal (only in GVim)
-    nnoremap <buffer><silent> <S-Space> :call g:TodoReverseCycleStatus()<CR>
-endfunction
-
 function g:TodoNewLineBelow()
     if match(getline('.'), '^\s*[+-\*] .\+') >= 0
         execute "normal! o- "
@@ -78,7 +64,15 @@ function g:TodoReverseCycleStatus()
     execute "normal! " .. l:colno .. "|"
 endfunction
 
-augroup todovim
-    autocmd!
-    autocmd FileType todo call s:SetupTodo()
-augroup END
+
+setlocal foldmethod=syntax
+setlocal conceallevel=2
+
+nnoremap <buffer><silent> o :call g:TodoNewLineBelow()<CR>
+nnoremap <buffer><silent> O :call g:TodoNewLineAbove()<CR>
+inoremap <buffer><silent> <CR> <ESC>:call g:TodoNewLineBelow()<CR>
+inoremap <buffer><silent> <Tab> <C-O>:call g:TodoShiftRight()<CR>
+inoremap <buffer><silent> <S-Tab> <C-O>:call g:TodoShiftLeft()<CR>
+nnoremap <buffer><silent> <Space> :call g:TodoCycleStatus()<CR>
+" Note: the following mapping will not work in a terminal (only in GVim)
+nnoremap <buffer><silent> <S-Space> :call g:TodoReverseCycleStatus()<CR>
