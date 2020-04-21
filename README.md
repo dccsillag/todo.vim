@@ -26,3 +26,5 @@ The syntax for the TODOs are as follows: task entries start with `-`, `+` or `*`
 The plugin comes with some handy keybinds - if you use `o` or `O` when on a task entry line, the plugin will automatically add `- ` to the beginning of the new line (same follows for `<Return>` in insert mode);
 
 Also, the plugin automatically runs `:setlocal fdm=syntax` for buffers of filetype `todo`. The syntax folding works just fine, but sometimes Vim fails to properly update the folds. If this happens, hitting `<C-L>` should solve the issue.
+
+You can use `<Space>` to cycle through the task statuses (_TODO_, _WIP_ and _done_). If you use GVim, you can also use `<S-Space>` to cycle in the reverse order.
