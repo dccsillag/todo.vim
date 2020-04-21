@@ -1,11 +1,12 @@
 function s:SetupTodo()
     setlocal foldmethod=syntax
 
-    nnoremap <silent> o :call g:TodoNewLineBelow()<CR>
-    nnoremap <silent> O :call g:TodoNewLineAbove()<CR>
-    nnoremap <silent> <Space> :call g:TodoCycleStatus()<CR>
+    nnoremap <buffer><silent> o :call g:TodoNewLineBelow()<CR>
+    nnoremap <buffer><silent> O :call g:TodoNewLineAbove()<CR>
+    inoremap <buffer><silent> <CR> <ESC>:call g:TodoNewLineBelow()<CR>
+    nnoremap <buffer><silent> <Space> :call g:TodoCycleStatus()<CR>
     " Note: the following mapping will not work in a terminal (only in GVim)
-    nnoremap <silent> <S-Space> :call g:TodoReverseCycleStatus()<CR>
+    nnoremap <buffer><silent> <S-Space> :call g:TodoReverseCycleStatus()<CR>
 endfunction
 
 function g:TodoNewLineBelow()
