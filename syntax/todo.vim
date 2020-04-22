@@ -22,7 +22,8 @@ syntax region markupUnderline     matchgroup=Conceal start="__"   skip="\\__" en
 syntax region markupVerbatim      matchgroup=Conceal start="`"    skip="\\`"  end="`"    oneline concealends
 syntax region markupVerbatim      matchgroup=Conceal start="```"              end="```"          concealends cchar=¬
 " " The following regex was taken from https://gist.github.com/tobym/584909:
-syntax match  markupURL       /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*/
+syntax match  markupURL       /\<https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*\>/
+syntax match  markupEmail     /\<[-A-Za-z0-9.]\+@[-A-Za-z0-9]\+\(\.[-A-Za-z0-9]\+\)\+\>/
 syntax match  markupItem      /^ *\./ conceal cchar=•
 
 " Matches some pretty concealing (arrows, ellipsis, etc.)
@@ -66,12 +67,13 @@ highlight link EntryTODO      Keyword
 highlight link EntryWIP       Identifier
 highlight link EntryDone      Comment
 
-highlight markupBold      ctermfg=NONE      ctermbg=NONE cterm=bold           guifg=NONE      guibg=NONE gui=bold
-highlight markupItalic    ctermfg=NONE      ctermbg=NONE cterm=italic         guifg=NONE      guibg=NONE gui=italic
-highlight markupUnderline ctermfg=NONE      ctermbg=NONE cterm=underline      guifg=NONE      guibg=NONE gui=underline
-highlight markupItem      ctermfg=NONE      ctermbg=NONE cterm=bold           guifg=NONE      guibg=NONE gui=bold
-highlight markupVerbatim  ctermfg=gray      ctermbg=NONE cterm=bold           guifg=gray      guibg=NONE gui=bold
-highlight markupURL       ctermfg=lightblue ctermbg=NONE cterm=bold,underline guifg=lightblue guibg=NONE gui=bold,underline
+highlight markupBold      ctermfg=NONE      ctermbg=NONE cterm=bold           guifg=NONE       guibg=NONE gui=bold
+highlight markupItalic    ctermfg=NONE      ctermbg=NONE cterm=italic         guifg=NONE       guibg=NONE gui=italic
+highlight markupUnderline ctermfg=NONE      ctermbg=NONE cterm=underline      guifg=NONE       guibg=NONE gui=underline
+highlight markupItem      ctermfg=NONE      ctermbg=NONE cterm=bold           guifg=NONE       guibg=NONE gui=bold
+highlight markupVerbatim  ctermfg=gray      ctermbg=NONE cterm=bold           guifg=gray       guibg=NONE gui=bold
+highlight markupURL       ctermfg=lightblue ctermbg=NONE cterm=bold,underline guifg=lightblue  guibg=NONE gui=bold,underline
+highlight markupEmail     ctermfg=green     ctermbg=NONE cterm=bold,underline guifg=lightgreen guibg=NONE gui=bold,underline
 
 " ------------------------------------------------------------------------------
 
