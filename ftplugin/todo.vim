@@ -3,8 +3,12 @@
 " Author: Daniel Csillag
 " Description: Handy functionality for `todo.vim`.
 
-function g:TodoNewLineBelow()
-    if getline(".") =~ "^\\s*[-+\\*] .\\+"
+function g:TodoNewLineBelow(consider_insert_mode)
+    let l:is_at_end = !a:consider_insert_mode || col(".") > len(getline("."))
+
+    if !l:is_at_end
+        execute "normal! i\n"
+    elseif getline(".") =~ "^\\s*[-+\\*] .\\+"
         execute "normal! o- "
         startinsert!
     elseif getline(".") =~ "^\\s*\\. .\\+"
@@ -12,7 +16,7 @@ function g:TodoNewLineBelow()
         startinsert!
     else
         execute "normal! o"
-        startinsert!
+        " startinsert!
     endif
 endfunction
 
@@ -95,9 +99,9 @@ if g:todovim_foldcolumn != 1
     execute "setlocal foldcolumn=" .. g:todovim_foldcolumn
 endif
 
-nnoremap <buffer><silent> o         :call g:TodoNewLineBelow()<CR>
+nnoremap <buffer><silent> o         :call g:TodoNewLineBelow(0)<CR>
 nnoremap <buffer><silent> O         :call g:TodoNewLineAbove()<CR>
-inoremap <buffer><silent> <CR>      <ESC>:call g:TodoNewLineBelow()<CR>
+inoremap <buffer><silent> <CR>      <C-\><C-O>:call g:TodoNewLineBelow(1)<CR>
 inoremap <buffer><silent> <Tab>     <C-\><C-O>:call g:TodoShiftRight()<CR>
 inoremap <buffer><silent> <S-Tab>   <C-\><C-O>:call g:TodoShiftLeft()<CR>
 nnoremap <buffer><silent> <Space>   :call g:TodoCycleStatus()<CR>
