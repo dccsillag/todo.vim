@@ -15,6 +15,10 @@ function g:TodoNewLineBelow(consider_insert_mode)
         execute "normal! o. "
         startinsert!
     else
+        if getline(".") =~ "^\\s*[-+\\*.] "
+            normal! S
+        endif
+
         normal! o_
         normal! x
         startinsert!
@@ -29,6 +33,10 @@ function g:TodoNewLineAbove()
         execute "normal! O. "
         startinsert!
     else
+        if getline(".") =~ "^\\s*[-+\\*.] "
+            normal! S
+        endif
+
         execute "normal! O"
         startinsert!
     endif
