@@ -24,7 +24,8 @@ syntax region markupVerbatim      matchgroup=Conceal start="```"              en
 " " The following regex was taken from https://gist.github.com/tobym/584909:
 syntax match  markupURL       /\<https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*\>/
 syntax match  markupEmail     /\<[-A-Za-z0-9.]\+@[-A-Za-z0-9]\+\(\.[-A-Za-z0-9]\+\)\+\>/
-syntax match  markupItem      /^ *\./ conceal cchar=•
+syntax match  markupItemWhole /^ *\./ contains=markupItemDot
+syntax match  markupItemDot   /\./ conceal cchar=• contained
 
 " Matches some pretty concealing (arrows, ellipsis, etc.)
 syntax match Conceal /\.\.\./ conceal cchar=…
