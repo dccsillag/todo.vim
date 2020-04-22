@@ -4,8 +4,11 @@
 " Description: Handy functionality for `todo.vim`.
 
 function g:TodoNewLineBelow()
-    if match(getline('.'), '^\s*[+-\*] .\+') >= 0
+    if getline(".") =~ "^\\s*[-+\\*] .\\+"
         execute "normal! o- "
+        startinsert!
+    elseif getline(".") =~ "^\\s*\\. .\\+"
+        execute "normal! o. "
         startinsert!
     else
         execute "normal! o"
@@ -14,8 +17,11 @@ function g:TodoNewLineBelow()
 endfunction
 
 function g:TodoNewLineAbove()
-    if match(getline('.'), '^\s*[+-\*] .\+') >= 0
+    if getline(".") =~ "^\\s*[-+\\*] .\\+"
         execute "normal! O- "
+        startinsert!
+    if getline(".") =~ "^\\s*\\. .\\+"
+        execute "normal! O. "
         startinsert!
     else
         execute "normal! O"
@@ -24,7 +30,7 @@ function g:TodoNewLineAbove()
 endfunction
 
 function g:TodoShiftRight()
-    if match(getline('.'), '^\s*[+-\*] .*') >= 0
+    if getline(".") =~ "^\\s*[-+\\*] .*"
         let l:line = line(".")
         let l:colno = col(".")
         normal! >>
@@ -35,12 +41,12 @@ function g:TodoShiftRight()
         else
             execute "normal! i\t"
         endif
-        call cursor(getline('.'), col('.')+1)
+        call cursor(getline("."), col(".")+1)
     endif
 endfunction
 
 function g:TodoShiftLeft()
-    if match(getline('.'), '^\s*[+-\*] .*') >= 0
+    if getline(".") =~ "^\\s*[-+\\*] .*"
         let l:line = line(".")
         let l:colno = col(".")
         normal! <<
@@ -51,13 +57,13 @@ endfunction
 function g:TodoCycleStatus()
     let l:colno = col(".")
     normal! 0
-    if match(getline('.'), '^\s*- .\+') >= 0
+    if getline(".") =~ "^\\s*- .\\+"
         normal! f-
         normal! r+
-    elseif match(getline('.'), '^\s*+ .\+') >= 0
+    elseif getline(".") =~ "^\\s*+ .\\+"
         normal! f+
         normal! r*
-    elseif match(getline('.'), '^\s*\* .\+') >= 0
+    elseif getline(".") =~ "^\\s*\\* .\\+"
         normal! f*
         normal! r-
     endif
@@ -67,13 +73,13 @@ endfunction
 function g:TodoReverseCycleStatus()
     let l:colno = col(".")
     normal! 0
-    if match(getline('.'), '^\s*- .\+') >= 0
+    if getline(".") =~ "^\\s*- .\\+"
         normal! f-
         normal! r*
-    elseif match(getline('.'), '^\s*\* .\+') >= 0
+    elseif getline(".") =~ "^\\s*\\* .\\+"
         normal! f*
         normal! r+
-    elseif match(getline('.'), '^\s*+ .\+') >= 0
+    elseif getline(".") =~ "^\\s*+ .\\+"
         normal! f+
         normal! r-
     endif
