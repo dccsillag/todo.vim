@@ -24,7 +24,7 @@ function g:TodoNewLineAbove()
     if getline(".") =~ "^\\s*[-+\\*] .\\+"
         execute "normal! O- "
         startinsert!
-    if getline(".") =~ "^\\s*\\. .\\+"
+    elseif getline(".") =~ "^\\s*\\. .\\+"
         execute "normal! O. "
         startinsert!
     else
