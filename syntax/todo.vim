@@ -21,9 +21,20 @@ syntax region markupItalic        matchgroup=Conceal start="_"    skip="\\_"  en
 syntax region markupUnderline     matchgroup=Conceal start="__"   skip="\\__" end="__"           concealends
 syntax region markupVerbatim      matchgroup=Conceal start="`"    skip="\\`"  end="`"    oneline concealends
 syntax region markupVerbatim      matchgroup=Conceal start="```"              end="```"          concealends cchar=¬
-" The following regex was taken from https://gist.github.com/tobym/584909:
+" " The following regex was taken from https://gist.github.com/tobym/584909:
 syntax match  markupURL       /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*/
 syntax match  markupItem      /^ *\./ conceal cchar=•
+
+" Matches some pretty concealing (arrows, ellipsis, etc.)
+syntax match Conceal /\.\.\./ conceal cchar=…
+syntax match Conceal /->/ conceal cchar=→
+syntax match Conceal /<-/ conceal cchar=←
+syntax match Conceal /<->/ conceal cchar=↔
+syntax match Conceal /=>/ conceal cchar=⇒
+syntax match Conceal /<=/ conceal cchar=⇐
+syntax match Conceal /==>/ conceal cchar=⇒
+syntax match Conceal /<==/ conceal cchar=⇐
+syntax match Conceal /<=>/ conceal cchar=⇔
 
 " Matches todo/wip/done entries:
 syntax match EntryTODO /^\s*- .\+/
