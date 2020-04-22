@@ -15,10 +15,15 @@ set cpo&vim
 " ------------------------------------------------------------------------------
 
 " Matches some markup (bold/italic/underline)
-syntax region markupItalic    matchgroup=Conceal start="\*"   skip="\\\*" end="\*"   concealends
-syntax region markupBold      matchgroup=Conceal start="\*\*" skip="\\\*" end="\*\*" concealends
-syntax region markupItalic    matchgroup=Conceal start="_"    skip="\\_"  end="_"    concealends
-syntax region markupUnderline matchgroup=Conceal start="__"   skip="\\__" end="__"   concealends
+syntax region markupItalic        matchgroup=Conceal start="\*"   skip="\\\*" end="\*"           concealends
+syntax region markupBold          matchgroup=Conceal start="\*\*" skip="\\\*" end="\*\*"         concealends
+syntax region markupItalic        matchgroup=Conceal start="_"    skip="\\_"  end="_"            concealends
+syntax region markupUnderline     matchgroup=Conceal start="__"   skip="\\__" end="__"           concealends
+syntax region markupVerbatim      matchgroup=Conceal start="`"    skip="\\`"  end="`"    oneline concealends
+syntax region markupVerbatim      matchgroup=Conceal start="```"              end="```"          concealends cchar=¬
+" The following regex was taken from https://gist.github.com/tobym/584909:
+syntax match  markupURL       /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*/
+syntax match  markupItem      /^ *\./ conceal cchar=•
 
 " Matches todo/wip/done entries:
 syntax match EntryTODO /^\s*- .\+/
@@ -46,12 +51,16 @@ syntax match Special /[a-z-]:\s\+.\+\n/
 
 " ------------------------------------------------------------------------------
 
-highlight link EntryTODO Keyword
-highlight link EntryWIP  Identifier
-highlight link EntryDone Comment
-highlight markupBold ctermfg=NONE ctermbg=NONE cterm=bold guifg=NONE guibg=NONE gui=bold
-highlight markupItalic ctermfg=NONE ctermbg=NONE cterm=italic guifg=NONE guibg=NONE gui=italic
-highlight markupUnderline ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline
+highlight link EntryTODO      Keyword
+highlight link EntryWIP       Identifier
+highlight link EntryDone      Comment
+
+highlight markupBold      ctermfg=NONE      ctermbg=NONE cterm=bold           guifg=NONE      guibg=NONE gui=bold
+highlight markupItalic    ctermfg=NONE      ctermbg=NONE cterm=italic         guifg=NONE      guibg=NONE gui=italic
+highlight markupUnderline ctermfg=NONE      ctermbg=NONE cterm=underline      guifg=NONE      guibg=NONE gui=underline
+highlight markupItem      ctermfg=NONE      ctermbg=NONE cterm=bold           guifg=NONE      guibg=NONE gui=bold
+highlight markupVerbatim  ctermfg=gray      ctermbg=NONE cterm=bold           guifg=gray      guibg=NONE gui=bold
+highlight markupURL       ctermfg=lightblue ctermbg=NONE cterm=bold,underline guifg=lightblue guibg=NONE gui=bold,underline
 
 " ------------------------------------------------------------------------------
 
