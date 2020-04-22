@@ -15,8 +15,9 @@ function g:TodoNewLineBelow(consider_insert_mode)
         execute "normal! o. "
         startinsert!
     else
-        execute "normal! o"
-        " startinsert!
+        normal! o_
+        normal! x
+        startinsert!
     endif
 endfunction
 
