@@ -89,6 +89,7 @@ endfunction
 
 setlocal foldmethod=syntax
 setlocal conceallevel=2
+setlocal autoindent
 
 if g:todovim_foldcolumn != 1
     execute "setlocal foldcolumn=" .. g:todovim_foldcolumn
