@@ -1,3 +1,8 @@
+" todo.vim
+"
+" Author: Daniel Csillag
+" Description: Handy functionality for `todo.vim`.
+
 function g:TodoNewLineBelow()
     if match(getline('.'), '^\s*[+-\*] .\+') >= 0
         execute "normal! o- "

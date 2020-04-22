@@ -1,3 +1,8 @@
+" todo.vim
+"
+" Author: Daniel Csillag
+" Description: Syntax coloring and folding for `todo.vim`.
+
 if version < 600
     syntax clear
 elseif exists("b:current_syntax")
