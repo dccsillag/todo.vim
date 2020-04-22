@@ -37,7 +37,8 @@ function g:TodoNewLineAbove()
             normal! S
         endif
 
-        execute "normal! O"
+        normal! O_
+        normal! x
         startinsert!
     endif
 endfunction
