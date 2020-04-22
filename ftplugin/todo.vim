@@ -53,12 +53,12 @@ function g:TodoCycleStatus()
     normal! 0
     if match(getline('.'), '^\s*- .\+') >= 0
         normal! f-
-        normal! r*
-    elseif match(getline('.'), '^\s*\* .\+') >= 0
-        normal! f*
         normal! r+
     elseif match(getline('.'), '^\s*+ .\+') >= 0
         normal! f+
+        normal! r*
+    elseif match(getline('.'), '^\s*\* .\+') >= 0
+        normal! f*
         normal! r-
     endif
     execute "normal! " .. l:colno .. "|"
@@ -69,12 +69,12 @@ function g:TodoReverseCycleStatus()
     normal! 0
     if match(getline('.'), '^\s*- .\+') >= 0
         normal! f-
-        normal! r+
-    elseif match(getline('.'), '^\s*+ .\+') >= 0
-        normal! f+
         normal! r*
     elseif match(getline('.'), '^\s*\* .\+') >= 0
         normal! f*
+        normal! r+
+    elseif match(getline('.'), '^\s*+ .\+') >= 0
+        normal! f+
         normal! r-
     endif
     execute "normal! " .. l:colno .. "|"
@@ -84,13 +84,13 @@ endfunction
 setlocal foldmethod=syntax
 setlocal conceallevel=2
 
-nnoremap <buffer><silent> o :call g:TodoNewLineBelow()<CR>
-nnoremap <buffer><silent> O :call g:TodoNewLineAbove()<CR>
-inoremap <buffer><silent> <CR> <ESC>:call g:TodoNewLineBelow()<CR>
-inoremap <buffer><silent> <Tab> <C-\><C-O>:call g:TodoShiftRight()<CR>
-inoremap <buffer><silent> <S-Tab> <C-\><C-O>:call g:TodoShiftLeft()<CR>
-nnoremap <buffer><silent> <Space> :call g:TodoCycleStatus()<CR>
-vnoremap <buffer><silent> <Space> :call g:TodoCycleStatus()<CR>
+nnoremap <buffer><silent> o         :call g:TodoNewLineBelow()<CR>
+nnoremap <buffer><silent> O         :call g:TodoNewLineAbove()<CR>
+inoremap <buffer><silent> <CR>      <ESC>:call g:TodoNewLineBelow()<CR>
+inoremap <buffer><silent> <Tab>     <C-\><C-O>:call g:TodoShiftRight()<CR>
+inoremap <buffer><silent> <S-Tab>   <C-\><C-O>:call g:TodoShiftLeft()<CR>
+nnoremap <buffer><silent> <Space>   :call g:TodoCycleStatus()<CR>
+vnoremap <buffer><silent> <Space>   :call g:TodoCycleStatus()<CR>
 " Note: the following mapping will not work in a terminal (only in GVim)
 nnoremap <buffer><silent> <S-Space> :call g:TodoReverseCycleStatus()<CR>
 vnoremap <buffer><silent> <S-Space> :call g:TodoReverseCycleStatus()<CR>
