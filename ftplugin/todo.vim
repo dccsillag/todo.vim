@@ -105,10 +105,6 @@ setlocal foldmethod=syntax
 setlocal conceallevel=2
 setlocal autoindent
 
-if g:todovim_foldcolumn != 1
-    execute "setlocal foldcolumn=" .. g:todovim_foldcolumn
-endif
-
 nnoremap <buffer><silent> o         :call g:TodoNewLineBelow(0)<CR>
 nnoremap <buffer><silent> O         :call g:TodoNewLineAbove()<CR>
 inoremap <buffer><silent> <CR>      <C-\><C-O>:call g:TodoNewLineBelow(1)<CR>

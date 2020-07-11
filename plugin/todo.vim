@@ -13,4 +13,4 @@ endfunction
 "
 " The `foldcolumn` (`fdc`) to set in the start of the `ftplugin`.
 "   If set to `-1`, then don't set the `fdc` at all.
-call s:GlobalOption("foldcolumn", 5)
+"call s:GlobalOption("foldcolumn", 5)
