@@ -59,9 +59,6 @@ syntax sync fromstart
 syntax match Title /.\+\n===\+\n/
 syntax match Title /.\+\n---\+\n/
 
-" Matches properties
-syntax match Special /[a-z-]:\s\+.\+\n/
-
 " ------------------------------------------------------------------------------
 
 highlight link EntryTODO      Keyword
